@@ -4,6 +4,8 @@ library(e1071)
 library(reshape2)
 library(dplyr)
 
+dst <- '../plots/'
+
 get_confusion <- function(results){
   confusion <- matrix(0, dim(results)[1], dim(results)[2])
   accuracies <- 1:dim(results)[3]
@@ -36,6 +38,7 @@ plot_accuracy <- function(accuracies, d=42, TT=42, kernel='kernel', dims=42,
   if(gsave == TRUE){
     filename <- paste('accuracy', tolower(gsub(' ', '_', norm)), tolower(info_type), 
                       d, TT, kernel, dims, 'founders', sep='_')
+    filename <- paste(dst, filename, sep='')
     ggplot2::ggsave(paste(filename, '.png', sep=''), plot=p, device='png', width=6, height=1.2, units='in')
     ggplot2::ggsave(paste(filename, '.pdf', sep=''), plot=p, device='pdf', width=6, height=1.2, units='in')
   }
@@ -81,6 +84,7 @@ plot_confusion <- function(confusion, founders_names, sample_runs=100, hclust_me
   if(gsave==TRUE){
     filename <- paste('confusionSVM', tolower(gsub(' ', '_', norm)), 
                       tolower(info_type), d, TT, kernel, dims, 'founders', sep='_')
+    filename <- paste(dst, filename, sep='')
     ggplot2::ggsave(paste(filename, '.png', sep=''), plot=p, device='png', width=7.5, height=6.75, units='in')
     ggplot2::ggsave(paste(filename, '.pdf', sep=''), plot=p, device='pdf', width=7.5, height=6.75, units='in')
     
@@ -88,6 +92,7 @@ plot_confusion <- function(confusion, founders_names, sample_runs=100, hclust_me
     
     filename <- paste('dendrogram', tolower(gsub(' ', '_', norm)),
                       tolower(info_type), d, TT, kernel, dims, 'founders', sep='_')
+    filename <- paste(dst, filename, sep='')
     ggplot2::ggsave(paste(filename, '.png', sep=''), plot=dhc, device='png', width=6, height=6, units='in')
     ggplot2::ggsave(paste(filename, '.pdf', sep=''), plot=dhc, device='pdf', width=6, height=6, units='in')
   }
@@ -123,6 +128,7 @@ plot_comparison <- function(conf_diff, founders_names,
   if(gsave==TRUE){
     filename <- paste('comparisonSVM', tolower(gsub(' ', '_', norm)), 
                       gsub(' ', '_', tolower(info_type)), d, TT, kernel, dims, 'founders', sep='_')
+    filename <- paste(dst, filename, sep='')
     ggplot2::ggsave(paste(filename, '.png', sep=''), plot=p, device='png', width=7.5, height=6.75, units='in')
     ggplot2::ggsave(paste(filename, '.pdf', sep=''), plot=p, device='pdf', width=7.5, height=6.75, units='in')
   }
@@ -133,7 +139,7 @@ plot_comparison <- function(conf_diff, founders_names,
 compare_descriptor_accuracies <- function(df_original, descriptor='Combined', 
                                d=42, TT=42, kernel='kernel', dims=42, norm='Norm', gsave=FALSE){
   df <- dplyr::arrange(df_original, desc(df_original[descriptor]))
-  dfm <- reshape::melt(df, id.var="Line", variable_name='Descriptor')
+  dfm <- reshape2::melt(df, id.vars="Line", variable.name='Descriptor')
   dfm$Line <- factor(dfm$Line, levels=dfm$Line[1:nrow(df)])
   titlename <- paste('Classification Average Accuracy (', d, ' directions, ', TT, ' thresholds)', sep='')
   colors <- c('firebrick1', 'blue', 'black')
@@ -152,6 +158,7 @@ compare_descriptor_accuracies <- function(df_original, descriptor='Combined',
   if(gsave == TRUE){
     filename <- paste('avg_accuracy', tolower(gsub(' ', '_', norm)), 
                       gsub(' ', '_', tolower(descriptor)), d, TT, kernel, dims, 'founders', sep='_')
+    filename <- paste(dst, filename, sep='')
     ggplot2::ggsave(paste(filename, '.png', sep=''), plot=p, device='png', width=9, height=3)
     ggplot2::ggsave(paste(filename, '.pdf', sep=''), plot=p, device='pdf', width=9, height=3)
   }
@@ -198,7 +205,7 @@ compare_threshold_accuracies_total <- function(accuracy_list, TT,
   if(gsave==TRUE){
     filename <- paste('overall_accuracy', tolower(gsub(' ','_', norm)), 
                       tolower(info_type), d, kernel, dims, 'founders', sep='_')
-    
+    filename <- paste(dst, filename, sep='')
     ggplot2::ggsave(paste(filename, '.pdf', sep=''), plot=p, device='pdf', width=5, height=6)
     ggplot2::ggsave(paste(filename, '.png', sep=''), plot=p, device='png', width=5, height=6)
   }
@@ -252,7 +259,7 @@ compare_direction_accuracies <- function(acc_list1, acc_list2, acc_list3, acc_li
   if(gsave == TRUE){
     filename <- paste('overall_accuracy_dirs', tolower(gsub(' ','_', norm)), 
                       tolower(info_type), kernel, dims, 'founders', sep='_')
-    
+    filename <- paste(dst, filename, sep='')
     ggplot2::ggsave(paste(filename, '.pdf', sep=''), plot=p, device='pdf', width=10, height=6)
     ggplot2::ggsave(paste(filename, '.png', sep=''), plot=p, device='png', width=10, height=6)
   }
@@ -284,6 +291,7 @@ compare_threshold_accuracies_lines <- function(df_original, descriptor='16',
   if(gsave == TRUE){
     filename <- paste('overall_avg_accuracy', tolower(gsub(' ', '_', norm)), 
                       tolower(info_type), d, kernel, dims, 'founders', sep='_')
+    filename <- paste(dst, filename, sep='')
     ggplot2::ggsave(paste(filename,'.png', sep=''), plot=p, device='png', width=9, height=3)
     ggplot2::ggsave(paste(filename,'.pdf', sep=''), plot=p, device='pdf', width=9, height=3)
   }

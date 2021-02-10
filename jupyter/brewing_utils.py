@@ -930,7 +930,7 @@ def complexify(img, center=True):
     neighs, subtuples = neighborhood_setup(img.ndim)
     binom = [special.comb(img.ndim, k, exact=True) for k in range(img.ndim+1)]
 
-    hood = np.zeros(len(neighs)+1, dtype=np.int)-1
+    hood = np.zeros(len(neighs)+1, dtype=int)-1
     cells = [[] for k in range(img.ndim+1)]
 
     for voxel in dcoords:

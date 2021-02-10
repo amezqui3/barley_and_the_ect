@@ -1,5 +1,7 @@
 # The shape of things to come
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/amezqui3/ect_and_barley/d232bf17d68866061c9dedbd19a72bca5a0fa60c)
+
 ## Quantifying the shape of plants with the Euler characteristic
 
 This notebook is meant to be a first step introduction to compute Euler Characteristic Curves and the Euler Characteristic Transform for 2D and 3D images.  This repository includes the jupyter notebooks for the [2021 Annual Meeting of the NAPPN](https://www.nappn2021.org/agenda) to be held virtually, led by [Erik Amézquita](http://egr.msu.edu/~amezqui3). This introduction is tailored for a phenotyping plant biology audience, so the focus is on topological tools for image analysis.
