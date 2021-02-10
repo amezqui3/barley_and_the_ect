@@ -1,6 +1,6 @@
 # The shape of things to come
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/amezqui3/ect_and_barley/d232bf17d68866061c9dedbd19a72bca5a0fa60c)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/amezqui3/ect_and_barley/HEAD)
 
 ## Quantifying the shape of plants with the Euler characteristic
 
